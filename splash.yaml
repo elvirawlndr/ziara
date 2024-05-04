@@ -1,12 +1,12 @@
 flutter_native_splash:
   color: "#F4F4F4"
-  color_dark: "#151F28"
+  color_dark: "#000000"
   image: assets\logos\ziara-dark.png
   image_dark: assets\logos\ziara-light.png
   
   android_12:
     color: "#F4F4F4"
-    color_dark: "#151F28"
+    color_dark: "#000000"
     image: assets\logos\ziara-dark.png
     image_dark: assets\logos\ziara-light.png
 

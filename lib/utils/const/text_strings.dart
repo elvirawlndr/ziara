@@ -9,4 +9,18 @@ class TTexts {
 
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Happy shopping";
+
+  static const String firstName = "First Name";
+  static const String lastName = "Last Name";
+  static const String email = "E-mail";
+  static const String password = "Password";
+  static const String phoneNumber = "Phone Number";
+  static const String signIn = "Sign In";
+  static const String createAccount = "Create Account";
+  static const String orSignInWith = "or Sign In With";
+  static const String orSignUpWith = "or Sign Up With";
+
+  static const String loginTitle = "Welcome back!";
+  static const String signupTitle = "Let's create your account";
+  static const String successCreateAccount = "Your account successfully created!";
 }
