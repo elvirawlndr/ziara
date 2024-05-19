@@ -27,5 +27,6 @@ class TLocalStorage {
     await _storage.erase();
   }
   
+  // ignore: non_constant_identifier_names
   static GetStorage() {}
 }

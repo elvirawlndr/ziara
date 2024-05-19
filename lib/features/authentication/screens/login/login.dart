@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ziara/features/authentication/screens/signup/signup.dart';
 import 'package:ziara/helper/helper_functions.dart';
+import 'package:ziara/nav_menu.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
@@ -49,16 +52,19 @@ class LoginScreen extends StatelessWidget {
                 
                     // password
                     TextFormField(
+                      obscureText: true,
                       decoration: const InputDecoration(prefixIcon: Icon(Iconsax.key), labelText: TTexts.password, suffixIcon: Icon(Iconsax.eye_slash),),
                     ),
                     const SizedBox(height: TSizes.spaceBtwInputFields/2),
                 
                     const SizedBox(height: TSizes.spaceBtwSections),
                 
-                    SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () {}, child: const Text(TTexts.signIn, style: TextStyle(fontFamily: 'Poppins')),)),
+                    // sign in button
+                    SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () => Get.to(() => const NavigationMenu()), child: const Text(TTexts.signIn, style: TextStyle(fontFamily: 'Poppins')),)),
                     const SizedBox(height: TSizes.spaceBtwItems),
                     
-                    SizedBox(width: double.infinity, child: OutlinedButton(onPressed: () {}, child: const Text(TTexts.createAccount, style: TextStyle(fontFamily: 'Poppins'),))),
+                    // sign up button
+                    SizedBox(width: double.infinity, child: OutlinedButton(onPressed: () => Get.to(() => const SignUpScreen()), child: const Text(TTexts.createAccount, style: TextStyle(fontFamily: 'Poppins'),))),
                 
                   ],
                 ),

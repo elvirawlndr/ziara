@@ -7,12 +7,11 @@ class TTexts {
   static const String onBoardingSubTitle2 = "Your Convinience, Our Priority";
   static const String onBoardingSubTitle3 = "Swift, Secure, and Contactless Delivery";
 
-  static const String homeAppbarTitle = "Good day for shopping";
+  static const String homeAppbarTitle = "Hello,";
   static const String homeAppbarSubTitle = "Happy shopping";
 
-  static const String firstName = "First Name";
-  static const String lastName = "Last Name";
-  static const String email = "E-mail";
+  static const String name = "Name";
+  static const String email = "Email";
   static const String password = "Password";
   static const String phoneNumber = "Phone Number";
   static const String signIn = "Sign In";

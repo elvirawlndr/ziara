@@ -6,6 +6,10 @@ class TColors {
   static const darkBase = Color(0xff444433);
   static const lightBase = Color(0xffF4F4F4);
 
+  static const Color textPrimary = Color(0xFF333333);
+  static const Color textSecondary = Color(0xFF6C7570);
+  static const Color textWhite = Colors.white;
+
   static const Color buttonSecondary = Color(0xFF6C7570);
   static const Color buttonDisabled = Color(0xFFC4C4C4);
 

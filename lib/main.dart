@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:ziara/utils/theme/theme.dart';
 import 'package:ziara/features/authentication/screens/login/login.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'ziara',
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
