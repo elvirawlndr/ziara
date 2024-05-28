@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ziara/utils/const/colors.dart';
-import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
 class TRoundedImage extends StatelessWidget {
@@ -32,7 +31,7 @@ class TRoundedImage extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius): BorderRadius.zero,
-          child: Image(fit: fit, image: const AssetImage(TImages.hoodie1)),
+          child: Image(fit: fit, image: AssetImage(image)),
       ),
       )
     );

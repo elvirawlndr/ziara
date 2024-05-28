@@ -26,21 +26,20 @@ class TVerticalImageText extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
-                child: Image(image: const AssetImage(TImages.shirtIcon), fit: BoxFit.cover, color: dark ? TColors.darkBase : TColors.white),
+                child: Image(image: AssetImage(image), fit: BoxFit.cover),
               ),
             ),
               const SizedBox(height: TSizes.spaceBtwItems/2),
                 SizedBox(
                   width: 55,
                   child: Text(
-                    'Hoodie',
+                    title,
                     style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.white),
                     maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                
           ],
         ),
       ),

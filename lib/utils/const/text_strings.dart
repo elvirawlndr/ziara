@@ -19,7 +19,7 @@ class TTexts {
   static const String orSignInWith = "or Sign In With";
   static const String orSignUpWith = "or Sign Up With";
 
-  static const String loginTitle = "Welcome back!";
+  static const String loginTitle = "Hello Again!";
   static const String signupTitle = "Let's create your account";
   static const String successCreateAccount = "Your account successfully created!";
 }

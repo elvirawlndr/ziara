@@ -3,6 +3,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/common/widgets/primary_header_container.dart';
 import 'package:ziara/common/widgets/product_card_vertical.dart';
+import 'package:ziara/data/models/category.dart';
+import 'package:ziara/data/models/product.dart';
 import 'package:ziara/device/device_utility.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
@@ -16,7 +18,16 @@ part "../../../../common/widgets/home_categories.dart";
 
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final List<Product> products = [
+    Product(image: TImages.hoodie_1, title: 'Comfort Hoodie', brand: 'Ziara Men', price: 'Rp600.000'),
+    Product(image: TImages.hoodie_2, title: 'Classic Hoodie', brand: 'Ziara Women', price: 'Rp450.000'),
+    Product(image: TImages.pants_1, title: 'Sleek Pants', brand: 'Ziara Men', price: 'Rp300.000'),
+    Product(image: TImages.pants_2, title: 'Urban Pants', brand: 'Ziara Women', price: 'Rp400.000'),
+    Product(image: TImages.jacket_1, title: 'Ride Jacket', brand: 'Ziara Men', price: 'Rp720.000'),
+    Product(image: TImages.tshirt_1, title: 'Classic T-Shirt', brand: 'Ziara Women', price: 'Rp250.000'),
+  ];
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +46,6 @@ class HomeScreen extends StatelessWidget {
                         Text(TTexts.homeAppbarSubTitle, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.grey)),
                       ],
                     ),
-                    /*actions: [
-                      Stack(
-                        children: [
-                          IconButton(onPressed: (){}, icon: const Icon(Iconsax.shopping_bag, color: TColors.white)),
-                          Positioned(
-                            right: 0,
-                            child: Container(
-                              width: 18,
-                              height: 18,
-                              decoration: BoxDecoration(
-                                color: TColors.black,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: Center(
-                                child: Text('2', style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.white)),
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                    */
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
@@ -65,14 +54,14 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   // CATEGORIES
-                  const Padding(
-                    padding: EdgeInsets.only(left: TSizes.defaultSpace),
+                  Padding(
+                    padding: const EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
                       children: [
-                        TSectionHeading(title: 'Categories', showActionButton: false, textColor: Colors.white),
-                        SizedBox(height: TSizes.spaceBtwItems),
+                        TSectionHeading(title: 'Categories', onPressed: (){}, textColor: TColors.white),
+                        const SizedBox(height: TSizes.spaceBtwItems),
 
-                        THomeCategories(),
+                        const THomeCategories(),
                       ],
                     ),
                   )
@@ -84,16 +73,19 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
+                  TSectionHeading(title: 'Popular Products', onPressed: (){}, textColor: TColors.darkBase),
                   SizedBox(
-                    height: 500,
                     child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: TSizes.gridViewSpacing,
                         crossAxisSpacing: TSizes.gridViewSpacing,
                         mainAxisExtent: 288,
                       ), 
-                        itemBuilder: (_, index) => const TProductCardVertical(),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) => TProductCardVertical(product: products[index]),
                     ),
                   ),
                 ],

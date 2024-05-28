@@ -28,15 +28,17 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
                     child: Image(
                       height: 150,
-                      image: AssetImage(dark ? TImages.lightAppLogo : TImages.darkAppLogo),
+                      image: AssetImage(dark ? TImages.lightClearAppLogo : TImages.darkClearAppLogo),
                     ),
                   ),
-                  Text(TTexts.loginTitle, style: Theme.of(context).textTheme.headlineMedium),
+                  const SizedBox(height: 20),
+                  Text(TTexts.loginTitle, style: Theme.of(context).textTheme.headlineSmall),
                 ],
               ),
 

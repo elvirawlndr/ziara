@@ -4,16 +4,17 @@ import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/styles/rounded_container.dart';
 import 'package:ziara/common/styles/rounded_image.dart';
 import 'package:ziara/common/widgets/products/product_title.dart';
+import 'package:ziara/data/models/product.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
-import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/shadows.dart';
 import 'package:ziara/utils/const/sizes.dart';
 part "t_circular_icon.dart";
 
 
 class TProductCardVertical extends StatelessWidget {
-  const TProductCardVertical({super.key});
+  final Product product;
+  const TProductCardVertical({super.key, required this.product});
 
 
   @override
@@ -39,7 +40,7 @@ class TProductCardVertical extends StatelessWidget {
               backgroundColor: dark ? TColors.darkBase : TColors.lightBase,
               child: Stack(
                 children: [
-                  const TRoundedImage(image: TImages.hoodie1, applyImageRadius: true),
+                  TRoundedImage(image: product.image, applyImageRadius: true),
       
                   Positioned(
       
@@ -65,11 +66,11 @@ class TProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TProductTitleText(title: 'Grey Hoodie', smallSize: true),
+                  TProductTitleText(title: product.title),
                   const SizedBox(height: TSizes.spaceBtwItems/2),
                   Row(
                     children: [
-                      Text('Ziara Men', overflow: TextOverflow.ellipsis, maxLines: 1, style: Theme.of(context).textTheme.labelMedium),
+                      Text(product.brand, overflow: TextOverflow.ellipsis, maxLines: 1, style: Theme.of(context).textTheme.labelMedium),
                       const SizedBox(width: TSizes.xs)
                     ],
                   ),
@@ -77,10 +78,10 @@ class TProductCardVertical extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Rp120.000',
+                        product.price,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Container(
                         decoration: const BoxDecoration(
@@ -93,7 +94,8 @@ class TProductCardVertical extends StatelessWidget {
                         child: const SizedBox(width: TSizes.iconLg * 1.2, height: TSizes.iconLg * 1.2, child: Center(child:Icon(Iconsax.add, color: TColors.white)))
                       )
                     ],
-                  )
+                  ),
+                  
                 ],
       
               ),
