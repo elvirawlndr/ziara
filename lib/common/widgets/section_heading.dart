@@ -1,6 +1,6 @@
 part of "../../features/shop/screens/home/home.dart"; 
 class TSectionHeading extends StatelessWidget {
-  const TSectionHeading({super.key, this.textColor, this.showActionButton = false, required this.title, this.buttonTitle = 'View All', this.onPressed});
+  const TSectionHeading({super.key, this.textColor, this.showActionButton = true, required this.title, this.buttonTitle = '', this.onPressed});
 
   final Color? textColor;
   final bool showActionButton;
@@ -12,7 +12,7 @@ class TSectionHeading extends StatelessWidget {
     return Row(
       children: [
         Text(title, style: Theme.of(context).textTheme.headlineSmall!.apply(color: textColor), maxLines: 1, overflow: TextOverflow.ellipsis),
-        if (showActionButton) TextButton(onPressed: onPressed, child: const Text('buttonTitle'))
+        if (showActionButton) TextButton(onPressed: onPressed, child: Text(buttonTitle))
       ],
     );
   }

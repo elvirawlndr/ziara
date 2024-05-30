@@ -7,7 +7,7 @@ import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
-class StoreScreen extends StatelessWidget {
+class SubCategoryScreen extends StatelessWidget {
   final List<Product> subCategoryProduct = [
     Product(image: TImages.hoodie_1, title: 'Comfort Hoodie', brand: 'Ziara Men', price: 'Rp600.000'),
     Product(image: TImages.hoodie_2, title: 'Classic Hoodie', brand: 'Ziara Women', price: 'Rp450.000'),
@@ -16,13 +16,13 @@ class StoreScreen extends StatelessWidget {
     Product(image: TImages.jacket_1, title: 'Ride Jacket', brand: 'Ziara Men', price: 'Rp720.000'),
   ];
 
-  StoreScreen({super.key});
+  SubCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text('Products', style: Theme.of(context).textTheme.headlineMedium), showBackArrow: true,
+        title: Text('Hoodie', style: Theme.of(context).textTheme.headlineMedium), showBackArrow: true,
         actions: [
           TCircularIcon(icon: Iconsax.search_normal, onPressed: (){})
         ],

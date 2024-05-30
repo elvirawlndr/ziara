@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/common/widgets/product_card_vertical.dart';
@@ -7,8 +8,8 @@ import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
-class StoreScreen extends StatelessWidget {
-  final List<Product> subCategoryProduct = [
+class FavoriteScreen extends StatelessWidget {
+  final List<Product> favProducts = [
     Product(image: TImages.hoodie_1, title: 'Comfort Hoodie', brand: 'Ziara Men', price: 'Rp600.000'),
     Product(image: TImages.hoodie_2, title: 'Classic Hoodie', brand: 'Ziara Women', price: 'Rp450.000'),
     Product(image: TImages.pants_1, title: 'Sleek Pants', brand: 'Ziara Men', price: 'Rp300.000'),
@@ -16,15 +17,15 @@ class StoreScreen extends StatelessWidget {
     Product(image: TImages.jacket_1, title: 'Ride Jacket', brand: 'Ziara Men', price: 'Rp720.000'),
   ];
 
-  StoreScreen({super.key});
+  FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text('Products', style: Theme.of(context).textTheme.headlineMedium), showBackArrow: true,
+        title: Text('Favorite', style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          TCircularIcon(icon: Iconsax.search_normal, onPressed: (){})
+          TCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(HomeScreen()))
         ],
       ),
       body: SingleChildScrollView(
@@ -32,7 +33,7 @@ class StoreScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TGridLayout(products: subCategoryProduct)
+              TGridLayout(products: favProducts)
             ],
           ),
           ),

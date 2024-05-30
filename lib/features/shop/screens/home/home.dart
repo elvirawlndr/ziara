@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/common/widgets/primary_header_container.dart';
@@ -6,6 +7,7 @@ import 'package:ziara/common/widgets/product_card_vertical.dart';
 import 'package:ziara/data/models/category.dart';
 import 'package:ziara/data/models/product.dart';
 import 'package:ziara/device/device_utility.dart';
+import 'package:ziara/features/shop/screens/subcategory/subcategory.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
@@ -15,6 +17,7 @@ part "../../../../common/widgets/search_container.dart";
 part "../../../../common/widgets/section_heading.dart";
 part "../../../../common/widgets/vertical_image_text.dart";
 part "../../../../common/widgets/home_categories.dart";
+part "t_grid_layout.dart";
 
 
 class HomeScreen extends StatelessWidget {
@@ -73,21 +76,8 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
-                  TSectionHeading(title: 'Popular Products', onPressed: (){}, textColor: TColors.darkBase),
-                  SizedBox(
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: TSizes.gridViewSpacing,
-                        crossAxisSpacing: TSizes.gridViewSpacing,
-                        mainAxisExtent: 288,
-                      ), 
-                        itemCount: products.length,
-                        itemBuilder: (context, index) => TProductCardVertical(product: products[index]),
-                    ),
-                  ),
+                  TSectionHeading(title: 'Most Popular', onPressed: (){}, textColor: TColors.darkBase),
+                  TGridLayout(products: products)
                 ],
               ),  
             )

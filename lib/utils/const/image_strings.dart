@@ -17,4 +17,6 @@ class TImages {
   static const String tshirt_1 = "assets/images/tshirt_1.png";
   static const String tshirt_2 = "assets/images/tshirt_2.png";
   static const String cap_1 = "assets/images/cap_1.png";
+  static const String profile = "assets/images/profile.jpg";
+  static const String success = "assets/icons/success.png";
 }

@@ -12,7 +12,7 @@ class THomeCategories extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemBuilder: (_, index) {
         final category = Categories.values[index];
-        return TVerticalImageText(title: _categoryTitle(category), image: _categoryImage(category), onTap: (){});
+        return TVerticalImageText(title: _categoryTitle(category), image: _categoryImage(category), onTap: () => Get.to(SubCategoryScreen()));
       }
     ),
   );

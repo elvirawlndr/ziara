@@ -14,7 +14,7 @@ class TCircularIcon extends StatelessWidget {
     return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: dark ? TColors.black.withOpacity(0.9) : TColors.white.withOpacity(0.9),
+                    color: dark ? TColors.black.withOpacity(0.9) : TColors.lightBase.withOpacity(0.9),
                   ),
                   child: IconButton(onPressed: (){}, icon: Icon(icon, color: color, size: size)),
                 );
