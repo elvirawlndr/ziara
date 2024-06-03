@@ -13,6 +13,8 @@ class SignupController extends GetxController {
   final password = TextEditingController();
   final hidepassword = true.obs;
   final signupFormKey = GlobalKey<FormState>();
+  var profilePicture = '';
+  var address = '';
   final isLoading = false.obs;
 
   Future<void> signup() async {
@@ -20,7 +22,7 @@ class SignupController extends GetxController {
       isLoading.value = true;
     }
     try {
-      await AuthenticationRepository.instance.createUserWithEmailAndPassword(email.text.trim(), password.text.trim());   
+      await AuthenticationRepository.instance.createUserWithEmailAndPassword(email.text.trim(), password.text.trim(), name.text.trim(), phoneNumber.text.trim(), profilePicture, address);   
       Get.snackbar('Success', 'Account created successfully', snackPosition: SnackPosition.BOTTOM, backgroundColor: TColors.lightBase);  
       Get.to(() => const NavigationMenu());
       

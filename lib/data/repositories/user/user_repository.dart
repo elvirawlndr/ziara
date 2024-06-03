@@ -18,4 +18,17 @@ class UserRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
+  Future<UserModel> getUserData(String uid) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await _db.collection('users').doc(uid).get();
+      if (documentSnapshot.exists) {
+        return UserModel.fromSnapshot(documentSnapshot);
+      } else {
+        return UserModel.empty();
+      }
+    } catch (e) {
+      throw 'Error fetching user data: $e';
+    }
+  }
 }

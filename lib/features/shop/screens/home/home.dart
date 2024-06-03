@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -6,7 +7,9 @@ import 'package:ziara/common/widgets/primary_header_container.dart';
 import 'package:ziara/common/widgets/product_card_vertical.dart';
 import 'package:ziara/data/models/category.dart';
 import 'package:ziara/data/models/product.dart';
+import 'package:ziara/data/repositories/authentication/authentication_repository.dart';
 import 'package:ziara/device/device_utility.dart';
+import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/features/shop/screens/subcategory/subcategory.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
@@ -34,23 +37,39 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationRepository authRepo = AuthenticationRepository.instance;
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TPrimaryHeaderContainer(
+            FutureBuilder<UserModel?>(
+              future: authRepo.getUserData(uid),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData) {
+                  return const Center(child: Text('User not found'));
+                } else {
+                  UserModel user = snapshot.data!;
+                
+            return TPrimaryHeaderContainer(
               child: Column(
                 children: [
+                  const SizedBox(height: TSizes.spaceBtwItems),
                   TAppBar(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(TTexts.homeAppbarTitle, style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.grey)),
-                        Text(TTexts.homeAppbarSubTitle, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.grey)),
+                        Text(user.name, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.grey)),
                       ],
                     ),
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwItems),
 
                   // SEARCH BAR
                   const TSearchContainer(text: 'Search Product'),
@@ -70,7 +89,10 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-            ),
+            );
+          }
+        }
+      ),
 
             Padding(
               padding: const EdgeInsets.all(TSizes.defaultSpace),
