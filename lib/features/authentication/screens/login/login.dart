@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ziara/features/authentication/controllers/login_controller.dart';
 import 'package:ziara/features/authentication/screens/signup/signup.dart';
 import 'package:ziara/helper/helper_functions.dart';
-import 'package:ziara/nav_menu.dart';
-import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 import 'package:ziara/utils/const/text_strings.dart';
+import 'package:ziara/validators/valid.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+    final loginFormKey = GlobalKey<FormState>();
     final dark = THelperFunctions.isDarkMode(context);
 
     return Scaffold(
@@ -42,27 +44,46 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
 
-              Form(child: Padding(
+              Form(
+                key: loginFormKey,
+                child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
                 child: Column(
                   children: [
                     // email
                     TextFormField(
+                      controller: controller.email,
+                      validator: (value) => TValid.validateEmail(value),
                       decoration: const InputDecoration(prefixIcon: Icon(Iconsax.message), labelText: TTexts.email),
                     ),
                     const SizedBox(height: TSizes.spaceBtwInputFields),
                 
                     // password
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(prefixIcon: Icon(Iconsax.key), labelText: TTexts.password, suffixIcon: Icon(Iconsax.eye_slash),),
+                    Obx(
+                    () => TextFormField(
+                      controller: controller.password,
+                      obscureText: controller.hidePassword.value,
+                      validator: (value) => TValid.validatePassword(value),
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Iconsax.key), 
+                        labelText: TTexts.password, 
+                        suffixIcon: IconButton(
+                          onPressed: () => controller.hidePassword.value =  !controller.hidePassword.value,
+                          icon: Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye))),
+                    ),
                     ),
                     const SizedBox(height: TSizes.spaceBtwInputFields/2),
                 
                     const SizedBox(height: TSizes.spaceBtwSections),
                 
                     // sign in button
-                    SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () => Get.to(() => const NavigationMenu()), child: const Text(TTexts.signIn, style: TextStyle(fontFamily: 'Poppins')),)),
+                    SizedBox(width: double.infinity, child: ElevatedButton(
+                      onPressed: () {
+                      if (loginFormKey.currentState!.validate()) {
+                        controller.login(context);
+                        }
+                        },
+                        child: const Text(TTexts.signIn, style: TextStyle(fontFamily: 'Poppins')),)),
                     const SizedBox(height: TSizes.spaceBtwItems),
                     
                     // sign up button
@@ -72,6 +93,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+            /*
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -99,6 +121,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(width: TSizes.spaceBtwItems),
               ],
             )
+            */
             ],
           ),
         ),

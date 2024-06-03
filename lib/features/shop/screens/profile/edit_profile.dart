@@ -14,6 +14,7 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: Text('Edit Profile', style: Theme.of(context).textTheme.headlineMedium),
+        showBackArrow: true
       ),
       body: SingleChildScrollView(
         child: Container(

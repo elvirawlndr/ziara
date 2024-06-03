@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/common/widgets/product_card_vertical.dart';
-import 'package:ziara/features/shop/checkout/checkout.dart';
+import 'package:ziara/features/shop/screens/checkout/checkout.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_description.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_price_text.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_size.dart';

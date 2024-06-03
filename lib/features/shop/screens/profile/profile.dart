@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
+import 'package:ziara/data/repositories/authentication/authentication_repository.dart';
 import 'package:ziara/features/shop/screens/profile/edit_profile.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
@@ -61,7 +62,11 @@ class ProfileScreen extends StatelessWidget {
               const Divider(),
               const SizedBox(height: 10),
 
-              ListTile(
+              InkWell(
+                onTap: () {
+                  AuthenticationRepository.instance.logout();
+                },
+                child: ListTile(
                 leading: Container(
                   width: 40,
                   height: 40,
@@ -73,6 +78,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 title: Text('Logout', style: Theme.of(context).textTheme.bodyMedium),
               ),
+              )
             ],
           )
         ),

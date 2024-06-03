@@ -22,7 +22,7 @@ class StoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text('Products', style: Theme.of(context).textTheme.headlineMedium), showBackArrow: true,
+        title: Text('Products', style: Theme.of(context).textTheme.headlineMedium),
         actions: [
           TCircularIcon(icon: Iconsax.search_normal, onPressed: (){})
         ],

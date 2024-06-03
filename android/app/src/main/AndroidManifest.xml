@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    package="com.example.ziara"
     <application
         android:label="ziara"
-        android:name="${applicationName}"
+        android:name=".FlutterMultiDexApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

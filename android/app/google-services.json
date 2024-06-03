@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "158682838923",
+    "project_id": "ziara-e4117",
+    "storage_bucket": "ziara-e4117.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158682838923:android:37bc2715ec20ad9466218e",
+        "android_client_info": {
+          "package_name": "com.example.ziara"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9HnNH00qTwaOfB7WX5KO_7YcS9T5a7s0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,19 +1,27 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:ziara/helper/helper_functions.dart';
+import 'package:ziara/common/widgets/appbar.dart';
+import 'package:ziara/features/authentication/controllers/signup_controller.dart';
+import 'package:ziara/features/authentication/screens/login/login.dart';
 import 'package:ziara/utils/const/colors.dart';
-import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 import 'package:ziara/utils/const/text_strings.dart';
+import 'package:ziara/validators/valid.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final controller = Get.put(SignupController());
+    final signupFormKey = GlobalKey<FormState>();
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const TAppBar(
+        
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -30,10 +38,13 @@ class SignUpScreen extends StatelessWidget {
 
               // form
               Form(
+                key: signupFormKey,
                 child: Column(
                 children: [
                   
                   TextFormField(
+                    controller: controller.name,
+                    validator: (value) => TValid.validateEmptyText('Name', value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: TTexts.name,
@@ -43,6 +54,8 @@ class SignUpScreen extends StatelessWidget {
 
                   // email
                   TextFormField(
+                    controller: controller.email,
+                    validator: (value) => TValid.validateEmail(value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: TTexts.email,
@@ -50,8 +63,11 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   const SizedBox(height: TSizes.spaceBtwInputFields),
 
+
                   // phone number
                   TextFormField(
+                    controller: controller.phoneNumber,
+                    validator: (value) => TValid.validatePhoneNumber(value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: TTexts.phoneNumber,
@@ -60,50 +76,52 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwInputFields),
 
                   // password
-                  TextFormField(
-                    expands: false,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: TTexts.password,
-                      prefixIcon: Icon(Iconsax.key),
-                      suffixIcon: Icon(Iconsax.eye_slash)),
-                    ),
+                  Obx(
+                    () => TextFormField(
+                      controller: controller.password,
+                      validator: (value) => TValid.validatePassword(value),
+                      expands: false,
+                      obscureText: controller.hidepassword.value,
+                      decoration: InputDecoration(
+                        labelText: TTexts.password,
+                        prefixIcon: const Icon(Iconsax.key),
+                        suffixIcon: IconButton(icon: const Icon(Iconsax.eye_slash), onPressed: () => controller.hidepassword.value = !controller.hidepassword.value,)),
+                      ),
+                  ),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
-                  SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () {}, child: const Text(TTexts.createAccount, style: TextStyle(fontFamily: 'Poppins')),)),
-                  const SizedBox(height: TSizes.spaceBtwItems),
-
-                  
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if(signupFormKey.currentState!.validate()) {
+                          SignupController.instance.signup();
+                        }
+                      },
+                      child: const Text(TTexts.createAccount, style: TextStyle(fontFamily: 'Poppins')),
+                    )
+                  )
                   ],
                 ),
               ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(child: Divider(color: dark ? TColors.darkgrey: TColors.grey, thickness: 0.5, indent: 60, endIndent: 5)),
-                Text(TTexts.orSignUpWith, style: Theme.of(context).textTheme.labelMedium),
-                Flexible(child: Divider(color: dark ? TColors.darkgrey: TColors.grey, thickness: 0.5, indent: 5, endIndent: 60)),
-              ],
-            ),
-            const SizedBox(height: TSizes.spaceBtwSections/2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(border: Border.all(color: TColors.grey), borderRadius: BorderRadius.circular(100)),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Image(
-                      width: TSizes.iconMd,
-                      height: TSizes.iconMd,
-                      image: AssetImage(TImages.google),
-                    ),
+            const SizedBox(height: TSizes.spaceBtwItems),
+            RichText(
+              text: TextSpan(
+                text: 'Already have an account? ',
+                style: Theme.of(context).textTheme.labelMedium, // Normal text style
+                children: [
+                  TextSpan(
+                    text: 'Sign in',
+                    style: const TextStyle(color: TColors.darkBase, fontWeight: FontWeight.bold), // Style for the clickable text
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Get.to(() => const LoginScreen()); // Navigate to the login page
+                      },
                   ),
-                ),
-                const SizedBox(width: TSizes.spaceBtwItems),
-              ],
-            )
+                ],
+              ),
+            ),
             ],
           ),
         ),
