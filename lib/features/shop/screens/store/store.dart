@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
-import 'package:ziara/common/widgets/product_card_vertical.dart';
 import 'package:ziara/data/models/product.dart';
 import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/utils/const/image_strings.dart';
@@ -23,9 +21,6 @@ class StoreScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: Text('Products', style: Theme.of(context).textTheme.headlineMedium),
-        actions: [
-          TCircularIcon(icon: Iconsax.search_normal, onPressed: (){})
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

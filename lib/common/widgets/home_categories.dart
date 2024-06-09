@@ -1,54 +1,91 @@
-part of "../../features/shop/screens/home/home.dart"; 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ziara/features/shop/controllers/category_controller.dart';
+import 'package:ziara/features/shop/screens/subcategory/subcategory.dart';
+
 class THomeCategories extends StatelessWidget {
   const THomeCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: ListView.builder(
-      shrinkWrap: true,
-      itemCount: Categories.values.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (_, index) {
-        final category = Categories.values[index];
-        return TVerticalImageText(title: _categoryTitle(category), image: _categoryImage(category), onTap: () => Get.to(SubCategoryScreen()));
+    final categoryController = Get.put(CategoryController());
+
+    return Obx(() {
+      if (categoryController.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
       }
-    ),
-  );
-  }
 
-  String _categoryTitle(Categories category) {
-    switch (category) {
-      case Categories.shirt:
-        return 'Shirt';
-      case Categories.pants:
-        return 'Pants';
-      case Categories.jacket:
-        return 'Jacket';
-      case Categories.hoodie:
-        return 'Hoodie';
-      case Categories.tshirt:
-        return 'T-Shirt';
-      case Categories.accessories:
-        return 'Accessories';
-    }
-  }
+      if (categoryController.featuredCategories.isEmpty) {
+        return const Center(child: Text('No categories available.'));
+      }
 
-  String _categoryImage(Categories category) {
-    switch (category) {
-      case Categories.shirt:
-        return TImages.shirt_2;
-      case Categories.pants:
-        return TImages.pants_1;
-      case Categories.jacket:
-        return TImages.jacket_1;
-      case Categories.hoodie:
-        return TImages.hoodie_1;
-      case Categories.tshirt:
-        return TImages.tshirt_1;
-      case Categories.accessories:
-        return TImages.cap_1;
-    }
+      return SizedBox(
+        height: 150,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: categoryController.featuredCategories.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (_, index) {
+            final category = categoryController.featuredCategories[index];
+            return GestureDetector(
+              onTap: () => Get.to(
+                  () => SubCategoryScreen()),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal:
+                        8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(16.0),
+                      ),
+                      child: Center(
+                        child: Image.network(
+                          category.image,
+                          height: 50,
+                          width: 50,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(Icons.broken_image,
+                                size: 50, color: Colors.red);
+                          },
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        (loadingProgress.expectedTotalBytes ??
+                                            1)
+                                    : null,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 4), // Space between the box and the text
+                    Text(
+                      category.name,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ), // Adjusted text size and color to white
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    });
   }
 }

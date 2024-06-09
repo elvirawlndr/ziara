@@ -7,7 +7,7 @@ class TBillingPaymentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TSectionHeading(title: 'Payment Method', buttonTitle: 'Change', onPressed: (){}),
+        TSectionHeading(title: 'Payment Method'),
         const SizedBox(height: TSizes.spaceBtwItems/2),
 
         Row(

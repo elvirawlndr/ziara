@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
-import 'package:ziara/common/widgets/product_card_vertical.dart';
 import 'package:ziara/data/models/product.dart';
 import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/utils/const/image_strings.dart';
@@ -25,7 +22,6 @@ class FavoriteScreen extends StatelessWidget {
       appBar: TAppBar(
         title: Text('Favorite', style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          TCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(HomeScreen()))
         ],
       ),
       body: SingleChildScrollView(

@@ -1,16 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
+import 'package:ziara/common/widgets/home_categories.dart';
 import 'package:ziara/common/widgets/primary_header_container.dart';
 import 'package:ziara/common/widgets/product_card_vertical.dart';
-import 'package:ziara/data/models/category.dart';
 import 'package:ziara/data/models/product.dart';
 import 'package:ziara/data/repositories/authentication/authentication_repository.dart';
-import 'package:ziara/device/device_utility.dart';
 import 'package:ziara/features/personalization/models/usermodel.dart';
-import 'package:ziara/features/shop/screens/subcategory/subcategory.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
@@ -19,7 +15,6 @@ import 'package:ziara/utils/const/text_strings.dart';
 part "../../../../common/widgets/search_container.dart";
 part "../../../../common/widgets/section_heading.dart";
 part "../../../../common/widgets/vertical_image_text.dart";
-part "../../../../common/widgets/home_categories.dart";
 part "t_grid_layout.dart";
 
 
@@ -72,8 +67,12 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   // SEARCH BAR
-                  const TSearchContainer(text: 'Search Product'),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  TSearchContainer(
+                    text: 'Search Product',
+                    onSubmitted: (query) {
+                      print('Search query: $query');
+                    }),
+                  const SizedBox(height: TSizes.inputFieldRadius),
 
                   // CATEGORIES
                   Padding(

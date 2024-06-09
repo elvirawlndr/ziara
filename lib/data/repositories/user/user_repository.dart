@@ -31,4 +31,28 @@ class UserRepository extends GetxController {
       throw 'Error fetching user data: $e';
     }
   }
+
+  Future<void> updateUserDetails(UserModel updatedUser) async {
+    try {
+      await _db.collection("Users").doc(updatedUser.uid).update(updatedUser.toJson());
+    } catch (e) {
+      throw 'Error update user data: $e';
+    }
+  }
+
+  Future<void> updateSingleField(Map<String, dynamic> json) async {
+    try {
+      await _db.collection("Users").doc().update(json);
+    } catch (e) {
+      throw 'Error update user data: $e';
+    }
+  }
+
+  Future<void> removeUserRecord(String userId) async {
+    try {
+      await _db.collection("Users").doc(userId).delete();
+    } catch (e) {
+      throw 'Error remove user data: $e';
+    }
+  }
 }

@@ -10,7 +10,7 @@ class TBillingAddressSection extends StatelessWidget {
       children: [
         TSectionHeading(title: 'Shipping Address', buttonTitle: 'Change', onPressed: (){}),
         Text('Ziara', style: Theme.of(context).textTheme.bodyLarge),
-        const SizedBox(width: TSizes.spaceBtwItems/2),
+        const SizedBox(width: TSizes.spaceBtwItems),
 
 
         Row(

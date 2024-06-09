@@ -27,7 +27,8 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text('Order Review', style: Theme.of(context).textTheme.headlineMedium)
+        title: Text('Order Review', style: Theme.of(context).textTheme.headlineMedium),
+        showBackArrow: true,
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -1,34 +1,54 @@
-part of "../../features/shop/screens/home/home.dart"; 
+part of "../../features/shop/screens/home/home.dart";
+
 class TSearchContainer extends StatelessWidget {
-  const TSearchContainer({super.key, required this.text, this.icon = Iconsax.search_normal, this.showBackground = true, this.showBorder = true, this.onTap, this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace)});
+  const TSearchContainer({
+    super.key,
+    required this.text,
+    this.showBackground = true,
+    this.showBorder = true,
+    this.onTap,
+    this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+    this.onSubmitted,
+  });
 
   final String text;
-  final IconData? icon;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
   final bool showBackground, showBorder;
+  final ValueChanged<String>? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    final TextEditingController _controller = TextEditingController();
 
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: padding,
         child: Container(
-          width: TDeviceUtils.getScreenWidth(),
-          padding: const EdgeInsets.all(TSizes.md),
           decoration: BoxDecoration(
-            color: showBackground ? dark ? TColors.darkBase : TColors.lightBase : Colors.transparent,
+            color: showBackground ? (dark ? TColors.darkBase : TColors.lightBase) : Colors.transparent,
             borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
             border: showBorder ? Border.all(color: TColors.grey) : null,
           ),
           child: Row(
             children: [
-              const Icon(Iconsax.search_normal, color: TColors.darkergrey),
-              const SizedBox(width: TSizes.spaceBtwItems),
-              Text('Search Product', style: Theme.of(context).textTheme.bodySmall)
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  onSubmitted: onSubmitted,
+                  decoration: InputDecoration(
+                    hintText: text,
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    prefixIcon: const Icon(Icons.search, color: TColors.darkergrey),
+                    border: InputBorder.none,
+                    filled: true,
+                    fillColor: showBackground ? (dark ? TColors.darkBase : TColors.lightBase) : Colors.transparent,
+                    contentPadding: const EdgeInsets.all(TSizes.sm),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

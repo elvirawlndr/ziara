@@ -80,4 +80,12 @@ class AuthenticationRepository extends GetxController {
       throw 'Error fetching user data: $e';
     }
   }
+
+  Future<void> updateUserData(UserModel user) async {
+    try {
+      await _firestore.collection('users').doc(user.uid).update(user.toJson());
+    } catch (e) {
+      throw 'Error updating user data: $e';
+    }
+  }
 }
