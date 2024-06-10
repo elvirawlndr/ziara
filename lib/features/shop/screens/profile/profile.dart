@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/data/repositories/authentication/authentication_repository.dart';
+import 'package:ziara/data/repositories/address/address_repository.dart';
 import 'package:ziara/features/personalization/models/usermodel.dart';
+import 'package:ziara/features/shop/models/address_model.dart';
+import 'package:ziara/features/shop/screens/address/address.dart';
 import 'package:ziara/features/shop/screens/profile/edit_profile.dart';
 import 'package:ziara/features/shop/orders/order.dart';
 import 'package:ziara/utils/const/colors.dart';
@@ -17,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthenticationRepository authRepo = AuthenticationRepository.instance;
+    final AddressRepository addressRepo = AddressRepository();
     final String uid = FirebaseAuth.instance.currentUser!.uid;
 
     return Scaffold(
@@ -89,6 +93,45 @@ class ProfileScreen extends StatelessWidget {
                           ),          
                         ),
                         const SizedBox(height: 30),
+                        const Divider(),
+                        const SizedBox(height: 10),
+                        FutureBuilder<List<AddressModel>>(
+                          future: addressRepo.fetchUserAddress(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                              return const Center(child: Text('No addresses found'));
+                            } else {
+                              List<AddressModel> addresses = snapshot.data!;
+                              return Column(
+                                children: addresses.map((address) {
+                                  return ListTile(
+                                    leading: Icon(Icons.location_on, color: TColors.buttonSecondary),
+                                    title: Text(address.street),
+                                    subtitle: Text('${address.city}, ${address.state}, ${address.zipCode}'),
+                                  );
+                                }).toList(),
+                              );
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          width: 280,
+                          child: ElevatedButton(
+                            onPressed: () => Get.to(() => AddAddressScreen()), 
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: TColors.darkBase, 
+                              side: BorderSide.none, 
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              )
+                            ),
+                            child: const Text('Add Address', style: TextStyle(color: TColors.white, fontFamily: 'Poppins')),
+                          ),
+                        ),
                         const Divider(),
                         const SizedBox(height: 10),
                         InkWell(

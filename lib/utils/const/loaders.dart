@@ -19,4 +19,15 @@ class TLoaders {
       icon: const Icon(Iconsax.warning_2, color: TColors.white),
     );
   }
+
+  static void successSnackBar({required String title, required String message}) {
+    Get.snackbar(
+      title,
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
+  }
+
 }
