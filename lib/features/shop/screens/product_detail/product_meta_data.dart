@@ -13,7 +13,7 @@ class TProductMetaData extends StatelessWidget {
         Column(
           children: [
             TProductTitleText(title: 'Comfort Hoodie'),
-            TProductPriceText(price: '600.000')
+            TProductPriceText(price: 600000)
           ],
         )
       ],

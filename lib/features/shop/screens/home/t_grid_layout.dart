@@ -1,8 +1,9 @@
 part of "home.dart"; 
 class TGridLayout extends StatelessWidget {
-  final List<Product> products;
 
   const TGridLayout({super.key, required this.products});
+  final List<Product> products;
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -15,8 +16,8 @@ class TGridLayout extends StatelessWidget {
                         crossAxisSpacing: TSizes.gridViewSpacing,
                         mainAxisExtent: 288,
                       ), 
-                        itemCount: products.length,
-                        itemBuilder: (context, index) => TProductCardVertical(product: products[index]),
+                      itemCount: products.length,
+                        itemBuilder: ((context, index) => TProductCardVertical(product: products[index]))
                     ),
                   );
   }

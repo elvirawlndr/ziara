@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
-import 'package:ziara/common/widgets/product_card_vertical.dart';
 import 'package:ziara/data/models/product.dart';
-import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
@@ -23,16 +20,13 @@ class SubCategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: Text('Hoodie', style: Theme.of(context).textTheme.headlineMedium), showBackArrow: true,
-        actions: [
-          TCircularIcon(icon: Iconsax.search_normal, onPressed: (){})
-        ],
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          padding: EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TGridLayout(products: subCategoryProduct)
+              //TGridLayout(products: subCategoryProduct)
             ],
           ),
           ),

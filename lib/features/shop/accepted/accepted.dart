@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ziara/helper/helper_functions.dart';
+import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
 class AcceptedScreen extends StatelessWidget {
@@ -17,14 +18,14 @@ class AcceptedScreen extends StatelessWidget {
           padding: const EdgeInsets.all(32),
           child: Column(
             children: [
-              Image(image: AssetImage(image), width: THelperFunctions.screenWidth() * 0.6),
+              Icon(Icons.card_giftcard_rounded, size: THelperFunctions.screenWidth() * 0.6, color: TColors.darkBase),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              Text(title, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center),
+              Text('Order Accepted!', style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center),
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              Text(subTitle, style: Theme.of(context).textTheme.labelMedium, textAlign: TextAlign.center),
-              const SizedBox(height: 100),
+              Text('Thanks for shopping at Ziara!\nYour style, our pleasure. Until next time!', style: Theme.of(context).textTheme.labelMedium, textAlign: TextAlign.center),
+              const SizedBox(height: 70),
 
               SizedBox(
                 width: double.infinity,

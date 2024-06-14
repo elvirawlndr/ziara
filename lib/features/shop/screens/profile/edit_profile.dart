@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/data/repositories/authentication/authentication_repository.dart';
+import 'package:ziara/data/repositories/user/user_repository.dart';
 import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
@@ -17,11 +19,15 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  final UserRepository _userRepository = UserRepository.instance;
+
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+  XFile? _profileImage;
+  final ImagePicker _picker = ImagePicker();
 
   final User? user = FirebaseAuth.instance.currentUser;
 
@@ -42,12 +48,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
+  Future<void> _pickImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      setState(() {
+        _profileImage = image;
+      });
+  }
+
   void _updateProfile() async {
     if (_formKey.currentState!.validate()) {
       try {
+        final user = FirebaseAuth.instance.currentUser;
         // Update email and password in Firebase Auth
         if (_emailController.text.isNotEmpty && _emailController.text != user!.email) {
-          await user!.updateEmail(_emailController.text);
+          await user.updateEmail(_emailController.text);
         }
         if (_passwordController.text.isNotEmpty) {
           await user!.updatePassword(_passwordController.text);
@@ -59,19 +73,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           name: _nameController.text,
           email: _emailController.text,
           phoneNumber: _phoneController.text,
-          profilePicture: '', // Assuming you have a default or placeholder picture
-          address: '', // Assuming you have a default or placeholder address
+          profilePicture: user.photoURL ?? '',
+          address: '', 
         );
 
         await AuthenticationRepository.instance.updateUserData(updatedUser);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated successfully')),
-        );
+        
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
+        
       }
     }
   }
@@ -105,22 +114,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: const Image(image: AssetImage(TImages.profile)),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: TColors.buttonSecondary.withOpacity(0.1),
-                      ),
-                      child: const Icon(
-                        Iconsax.edit,
-                        size: 20,
-                      ),
                     ),
                   ),
                 ],

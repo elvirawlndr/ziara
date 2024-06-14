@@ -11,6 +11,7 @@ class CategoryController extends GetxController {
   RxList<CategoryModel> allCategories = <CategoryModel>[].obs;
   RxList<CategoryModel> featuredCategories = <CategoryModel>[].obs;
 
+  @override
   void onInit() {
     fetchCategories();
     super.onInit();

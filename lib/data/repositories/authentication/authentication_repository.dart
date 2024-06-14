@@ -30,7 +30,7 @@ class AuthenticationRepository extends GetxController {
       User? user = userCredential.user;
 
       if (user != null) {
-          UserModel userModel = UserModel(uid: user.uid, name: name, email: user.email!, phoneNumber: phoneNumber, profilePicture: profilePicture, address: address);
+          UserModel userModel = UserModel(uid: user.uid, name: name, email: user.email!, phoneNumber: phoneNumber, profilePicture: "https://firebasestorage.googleapis.com/v0/b/ziara-e4117.appspot.com/o/profile%2Fprofile.jpg?alt=media&token=e6198cd1-879f-4a63-b5e4-5892f174429b", address: address);
           await _firestore.collection('users').doc(user.uid).set(userModel.toJson());
           firebaseUser.value != null ? Get.offAll(() => const NavigationMenu()) : Get.to(() => const LoginScreen());
         }

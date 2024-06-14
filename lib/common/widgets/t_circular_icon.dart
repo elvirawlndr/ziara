@@ -1,4 +1,4 @@
-part of "product_card_vertical.dart"; 
+/*part of "product_card_vertical.dart"; 
 class TCircularIcon extends StatelessWidget {
   const TCircularIcon({super.key, this.width, this.height, this.size = TSizes.lg, required this.icon, this.color, this.backgroundColor, this.onPressed});
 
@@ -20,3 +20,4 @@ class TCircularIcon extends StatelessWidget {
                 );
   }
 }
+*/

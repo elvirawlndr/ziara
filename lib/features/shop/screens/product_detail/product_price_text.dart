@@ -4,7 +4,8 @@ import 'package:ziara/utils/const/colors.dart';
 class TProductPriceText extends StatelessWidget {
   const TProductPriceText({super.key, this.currencySign = 'Rp ', required this.price, this.maxLines = 1, this.lineThrough = false, this.isLarge = true});
 
-  final String currencySign, price;
+  final String currencySign;
+  final double price;
   final int maxLines;
   final bool lineThrough;
   final bool isLarge;
@@ -20,7 +21,7 @@ class TProductPriceText extends StatelessWidget {
         borderRadius: BorderRadius.circular(8)
       ),
       child: Text(
-      currencySign + price,
+      currencySign + price.toString(),
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style:

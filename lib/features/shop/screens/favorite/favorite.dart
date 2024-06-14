@@ -21,8 +21,6 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: Text('Favorite', style: Theme.of(context).textTheme.headlineMedium),
-        actions: [
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

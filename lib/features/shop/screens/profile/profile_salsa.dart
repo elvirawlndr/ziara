@@ -4,42 +4,25 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/data/repositories/authentication/authentication_repository.dart';
-import 'package:ziara/data/repositories/user/user_repository.dart';
+import 'package:ziara/data/repositories/address/address_repository.dart';
 import 'package:ziara/features/personalization/models/usermodel.dart';
+import 'package:ziara/features/shop/models/address_model.dart';
+import 'package:ziara/features/shop/screens/address/address.dart';
 import 'package:ziara/features/shop/screens/profile/edit_profile.dart';
 import 'package:ziara/features/shop/orders/order.dart';
 import 'package:ziara/utils/const/colors.dart';
+import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  
-  final AuthenticationRepository authRepo = AuthenticationRepository.instance;
-  final String uid = FirebaseAuth.instance.currentUser!.uid;
-  final UserRepository userRepo = UserRepository.instance;
-
-  late Future<UserModel?> _userData;
-
-  @override
-  void initState() {
-    super.initState();
-    _userData = authRepo.getUserData(uid);
-  }
-
-  Future<void> _refreshUserData() async {
-    setState(() {
-      _userData = authRepo.getUserData(uid);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final AuthenticationRepository authRepo = AuthenticationRepository.instance;
+    final AddressRepository addressRepo = AddressRepository();
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+
     return Scaffold(
       appBar: TAppBar(
         title: Text('Profile', style: Theme.of(context).textTheme.headlineMedium),
@@ -50,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               FutureBuilder<UserModel?>(
-                future: _userData,
+                future: authRepo.getUserData(uid),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -70,11 +53,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 120,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: Image.network(
-                                  user.profilePicture.isNotEmpty ? user.profilePicture: 'https://firebasestorage.googleapis.com/v0/b/ziara-e4117.appspot.com/o/profile%2Fprofile.jpg?alt=media&token=e6198cd1-879f-4a63-b5e4-5892f174429b',
-                                  fit: BoxFit.cover,
-                                )
-
+                                child: const Image(image: AssetImage(TImages.profile)),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: TColors.buttonSecondary.withOpacity(0.1),
+                                ),
+                                child: const Icon(
+                                  Iconsax.edit,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ],
@@ -86,12 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(
                           width: 280,
                           child: ElevatedButton(
-                            onPressed: () async {
-                              final result = await Get.to(const EditProfileScreen());
-                              if (result == true) {
-                                _refreshUserData();
-                              }
-                            },
+                            onPressed: () => Get.to(const EditProfileScreen()), 
                             style: ElevatedButton.styleFrom(
                               backgroundColor: TColors.darkBase, 
                               side: BorderSide.none, 
@@ -103,6 +93,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),          
                         ),
                         const SizedBox(height: 30),
+                        const Divider(),
+                        const SizedBox(height: 10),
+                        FutureBuilder<List<AddressModel>>(
+                          future: addressRepo.fetchUserAddress(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                              return const Center(child: Text('No addresses found'));
+                            } else {
+                              List<AddressModel> addresses = snapshot.data!;
+                              return Column(
+                                children: addresses.map((address) {
+                                  return ListTile(
+                                    leading: const Icon(Icons.location_on, color: TColors.buttonSecondary),
+                                    title: Text(address.street),
+                                    subtitle: Text('${address.city}, ${address.state}, ${address.zipCode}'),
+                                  );
+                                }).toList(),
+                              );
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          width: 280,
+                          child: ElevatedButton(
+                            onPressed: () => Get.to(() => AddAddressScreen()), 
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: TColors.darkBase, 
+                              side: BorderSide.none, 
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              )
+                            ),
+                            child: const Text('Add Address', style: TextStyle(color: TColors.white, fontFamily: 'Poppins')),
+                          ),
+                        ),
                         const Divider(),
                         const SizedBox(height: 10),
                         InkWell(

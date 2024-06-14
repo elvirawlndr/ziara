@@ -70,10 +70,10 @@ class THomeCategories extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 4), // Space between the box and the text
+                    const SizedBox(height: 4), // Space between the box and the text
                     Text(
                       category.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,
                       ), // Adjusted text size and color to white

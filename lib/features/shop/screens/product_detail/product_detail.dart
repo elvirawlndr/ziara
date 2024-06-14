@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/widgets/appbar.dart';
-import 'package:ziara/common/widgets/product_card_vertical.dart';
 import 'package:ziara/features/shop/screens/checkout/checkout.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_description.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_price_text.dart';
@@ -39,7 +37,7 @@ class ProductDetailScreen extends StatelessWidget {
                             child: 
                               Text('Comfort Hoodie', style: Theme.of(context).textTheme.headlineSmall) 
                           ),
-                          const TProductPriceText(price: "600.000"),
+                          const TProductPriceText(price: 600.000),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -68,7 +66,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: TAppBar(
         showBackArrow: true,
         actions: [
-          TCircularIcon(icon: Iconsax.heart5, color: Colors.red,)
+          //TCircularIcon(icon: Iconsax.heart5, color: Colors.red,)
         ],
       ),
     ));

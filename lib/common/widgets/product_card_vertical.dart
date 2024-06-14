@@ -11,7 +11,6 @@ import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/shadows.dart';
 import 'package:ziara/utils/const/sizes.dart';
-part "t_circular_icon.dart";
 
 
 class TProductCardVertical extends StatelessWidget {
@@ -53,11 +52,11 @@ class TProductCardVertical extends StatelessWidget {
                     ),
                   ),
       
-                  const Positioned(
-                    top: 0, 
-                    right: 0, 
-                    child: TCircularIcon(icon: Iconsax.heart5, color: Colors.red)
-                  ),
+                  //const Positioned(
+                    //top: 0, 
+                    //right: 0, 
+                    //child: TCircularIcon(icon: Iconsax.heart5, color: Colors.red)
+                  //),
                 ],
               ),
             ),
