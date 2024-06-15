@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ziara/common/widgets/appbar.dart';
+import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/features/shop/controllers/product_controller.dart';
 import 'package:ziara/features/shop/screens/checkout/checkout.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_description.dart';
@@ -15,6 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProductController productController = Get.find();
     final product = productController.getProductById(productId);
+    final User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -54,7 +57,7 @@ class ProductDetailScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () => Get.to(() => const CheckoutScreen()),
+                          onPressed: () => Get.to(() => CheckoutScreen(product: product)),
                           child: const Text('Checkout', style: TextStyle(fontFamily: 'Poppins'))),
                       )
                       

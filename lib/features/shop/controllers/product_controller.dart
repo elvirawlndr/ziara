@@ -54,4 +54,16 @@ class ProductController extends GetxController {
       TLoaders.errorSnackBar(title: 'Error', message: e.toString());
     }
   }
+
+  Future<ProductModel> fetchProductById(String id) async {
+    try {
+      var snapshot = await FirebaseFirestore.instance
+          .collection('products')
+          .doc(id)
+          .get();
+      return ProductModel.fromJson(snapshot.data()!);
+    } catch (e) {
+      throw Exception('Failed to fetch product: $e');
+    }
+  }
 }

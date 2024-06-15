@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ziara/common/widgets/appbar.dart';
+import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/features/shop/controllers/product_controller.dart';
 import 'package:ziara/features/shop/screens/product_detail/product.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_detail.dart';

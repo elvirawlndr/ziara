@@ -1,12 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ziara/common/styles/rounded_container.dart';
 import 'package:ziara/common/styles/rounded_image.dart';
 import 'package:ziara/common/widgets/products/product_title.dart';
 import 'package:ziara/data/models/product.dart';
-import 'package:ziara/features/shop/screens/product_detail/product_detail.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/shadows.dart';

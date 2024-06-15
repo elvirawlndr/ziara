@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/features/shop/controllers/product_controller.dart';
 import 'package:ziara/features/shop/orders/orders_list.dart';
 
@@ -11,12 +12,12 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Orders'),
+      appBar: TAppBar(
+        title: Text('Orders', style: Theme.of(context).textTheme.headlineMedium),
       ),
       body: Obx(() {
         if (productController.orders.isEmpty) {
-          return Center(child: Text('No orders available'));
+          return const Center(child: Text('No orders available'));
         }
 
         return ListView.builder(

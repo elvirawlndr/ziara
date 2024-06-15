@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -6,6 +7,8 @@ import 'package:ziara/common/styles/rounded_container.dart';
 import 'package:ziara/common/styles/rounded_image.dart';
 import 'package:ziara/common/widgets/appbar.dart';
 import 'package:ziara/common/widgets/products/product_title.dart';
+import 'package:ziara/features/shop/models/product_model.dart';
+import 'package:ziara/features/shop/screens/checkout/t_billing_address_section.dart';
 import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_price_text.dart';
 import 'package:ziara/features/shop/success/success.dart';
@@ -16,18 +19,19 @@ import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 part "t_checkout_item.dart";
 part "t_billing_payment_section.dart";
-part "t_billing_address_section.dart";
 part "t_billing_amount_section.dart";
 
 
 class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({super.key});
+  final ProductModel product;
+  final User? user = FirebaseAuth.instance.currentUser;
+  CheckoutScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text('Order Review', style: Theme.of(context).textTheme.headlineMedium),
+        title: Text('Checkout', style: Theme.of(context).textTheme.headlineMedium),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -39,7 +43,7 @@ class CheckoutScreen extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(height: TSizes.spaceBtwSections),
             itemBuilder: (_, index) => Column(
               children: [
-                const TCheckoutItem(),
+                TCheckoutItem(product: product),
                 const SizedBox(height: TSizes.spaceBtwItems),
 
 
@@ -47,16 +51,16 @@ class CheckoutScreen extends StatelessWidget {
                   showBorder: true,
                   padding: const EdgeInsets.all(TSizes.md),
                   backgroundColor: THelperFunctions.isDarkMode(context) ? TColors.black : TColors.white,
-                  child: const  Column(
+                  child: Column(
                     children: [
-                      TBillingAmountSection(),
-                      SizedBox(height: TSizes.spaceBtwItems),
+                      TBillingAmountSection(product: product),
+                      const SizedBox(height: TSizes.spaceBtwItems),
 
-                      Divider(),
-                      SizedBox(height: TSizes.spaceBtwItems),
+                      const Divider(),
+                      const SizedBox(height: TSizes.spaceBtwItems),
 
-                      TBillingPaymentSection(),
-                      SizedBox(height: TSizes.spaceBtwItems),
+                      const TBillingPaymentSection(),
+                      const SizedBox(height: TSizes.spaceBtwItems),
 
                       TBillingAddressSection()
                     ],
@@ -80,7 +84,7 @@ class CheckoutScreen extends StatelessWidget {
                 onPressed: () => Get.offAll(() => const NavigationMenu()),
               ),
             ),
-            child: const Text('Checkout Rp 600.000', style: TextStyle(fontFamily: 'Poppins'),),
+            child: const Text('Checkout', style: TextStyle(fontFamily: 'Poppins'),),
           ),
         ),
     );

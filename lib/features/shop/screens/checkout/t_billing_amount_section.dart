@@ -1,7 +1,8 @@
 part of "checkout.dart";
 
 class TBillingAmountSection extends StatelessWidget {
-  const TBillingAmountSection({super.key});
+  final ProductModel product;
+  const TBillingAmountSection({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class TBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Subtotal', style: Theme.of(context).textTheme.bodyLarge),
-            const TProductPriceText(price: 600, isLarge: false)
+            TProductPriceText(price: product.price, isLarge: false)
           ],
         ),
         const SizedBox(height: TSizes.spaceBtwItems/2)

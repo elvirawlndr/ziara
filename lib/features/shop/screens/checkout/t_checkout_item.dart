@@ -1,6 +1,7 @@
 part of "checkout.dart"; 
 class TCheckoutItem extends StatelessWidget {
-  const TCheckoutItem({super.key});
+  final ProductModel product;
+  const TCheckoutItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,13 @@ class TCheckoutItem extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const TProductTitleText(title: 'Comfort Hoodie', maxLines: 1),
+                          TProductTitleText(title: product.name, maxLines: 1),
                       
                           Text.rich(
                             TextSpan(
                               children: [
                                 TextSpan(text: 'Size: ', style: Theme.of(context).textTheme.bodySmall),
-                                TextSpan(text: 'M', style: Theme.of(context).textTheme.bodyLarge),
+                                TextSpan(text: 'All Size', style: Theme.of(context).textTheme.bodyLarge),
                               ]
                             )
                           )
