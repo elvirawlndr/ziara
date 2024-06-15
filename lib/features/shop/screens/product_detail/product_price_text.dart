@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ziara/utils/const/colors.dart';
 
 class TProductPriceText extends StatelessWidget {
-  const TProductPriceText({super.key, this.currencySign = 'Rp ', required this.price, this.maxLines = 1, this.lineThrough = false, this.isLarge = true});
+  const TProductPriceText({super.key, this.currencySign = '\$', required this.price, this.maxLines = 1, this.lineThrough = false, this.isLarge = true});
 
   final String currencySign;
-  final double price;
+  final int price;
   final int maxLines;
   final bool lineThrough;
   final bool isLarge;
@@ -21,7 +21,7 @@ class TProductPriceText extends StatelessWidget {
         borderRadius: BorderRadius.circular(8)
       ),
       child: Text(
-      currencySign + price.toString(),
+      currencySign + price.toStringAsFixed(2),
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style:

@@ -19,9 +19,7 @@ class TProductSize extends StatelessWidget {
         Wrap(
                         spacing: 8,
                         children: [
-                          TChoiceChip(text: 'S', selected: false, onSelected: (value){}),
-                          TChoiceChip(text: 'M', selected: true, onSelected: (value){}),
-                          TChoiceChip(text: 'L', selected: false, onSelected: (value){})
+                          TChoiceChip(text: 'All Size', selected: true, onSelected: (value){}),
                         ],
                       )
       ],

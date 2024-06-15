@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ziara/features/shop/orders/order.dart';
 import 'package:ziara/features/shop/screens/home/home.dart';
 import 'package:ziara/features/shop/screens/profile/profile.dart';
 import 'package:ziara/features/shop/screens/store/store.dart';
-import 'package:ziara/features/shop/screens/favorite/favorite.dart';
 import 'package:ziara/helper/helper_functions.dart';
 import 'package:ziara/utils/const/colors.dart';
 
@@ -28,8 +28,8 @@ class NavigationMenu extends StatelessWidget {
         
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Iconsax.shop), label: 'Shop'),
-            NavigationDestination(icon: Icon(Iconsax.heart), label: 'Favorite'),
+            NavigationDestination(icon: Icon(Iconsax.shop), label: 'Store'),
+            NavigationDestination(icon: Icon(Iconsax.transaction_minus), label: 'Orders'),
             NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
           ],
         ),
@@ -41,5 +41,5 @@ class NavigationMenu extends StatelessWidget {
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
-  final screens = [HomeScreen(), const StoreScreen(), FavoriteScreen(), const ProfileScreen()];
+  final screens = [HomeScreen(), const StoreScreen(), OrderScreen(), const ProfileScreen()];
 }

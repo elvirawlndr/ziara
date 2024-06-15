@@ -7,9 +7,8 @@ import 'package:ziara/data/repositories/authentication/authentication_repository
 import 'package:ziara/data/repositories/address/address_repository.dart';
 import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/features/shop/models/address_model.dart';
-import 'package:ziara/features/shop/screens/address/address.dart';
+import 'package:ziara/features/shop/screens/address/add_address.dart';
 import 'package:ziara/features/shop/screens/profile/edit_profile.dart';
-import 'package:ziara/features/shop/orders/order.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
@@ -54,22 +53,6 @@ class ProfileScreen extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
                                 child: const Image(image: AssetImage(TImages.profile)),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: TColors.buttonSecondary.withOpacity(0.1),
-                                ),
-                                child: const Icon(
-                                  Iconsax.edit,
-                                  size: 20,
-                                ),
                               ),
                             ),
                           ],
@@ -134,23 +117,6 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         const Divider(),
                         const SizedBox(height: 10),
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => const OrderScreen());
-                          },
-                          child: ListTile(
-                            leading: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: TColors.buttonSecondary.withOpacity(0.1),
-                              ),
-                              child: const Icon(Iconsax.transaction_minus, color: TColors.buttonSecondary),
-                            ),
-                            title: Text('My Orders', style: Theme.of(context).textTheme.bodyMedium),
-                          ),
-                        ),
                         InkWell(
                           onTap: () {
                             AuthenticationRepository.instance.logout();

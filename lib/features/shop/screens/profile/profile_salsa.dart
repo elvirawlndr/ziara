@@ -7,7 +7,7 @@ import 'package:ziara/data/repositories/authentication/authentication_repository
 import 'package:ziara/data/repositories/address/address_repository.dart';
 import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/features/shop/models/address_model.dart';
-import 'package:ziara/features/shop/screens/address/address.dart';
+import 'package:ziara/features/shop/screens/address/add_address.dart';
 import 'package:ziara/features/shop/screens/profile/edit_profile.dart';
 import 'package:ziara/features/shop/orders/order.dart';
 import 'package:ziara/utils/const/colors.dart';
@@ -136,7 +136,7 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         InkWell(
                           onTap: () {
-                            Get.to(() => const OrderScreen());
+                            //Get.to(() => const OrderScreen());
                           },
                           child: ListTile(
                             leading: Container(

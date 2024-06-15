@@ -68,7 +68,7 @@ class AddProductScreen extends StatelessWidget {
                 final newProduct = ProductModel(
                   id: uuid.v4(),
                   name: nameController.text,
-                  price: double.parse(priceController.text),
+                  price: int.parse(priceController.text),
                   description: descriptionController.text,
                   imageUrl: imageUrlController.text,
                 );

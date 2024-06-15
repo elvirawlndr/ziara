@@ -11,7 +11,7 @@ class TBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Subtotal', style: Theme.of(context).textTheme.bodyLarge),
-            const TProductPriceText(price: 600.000, isLarge: false)
+            const TProductPriceText(price: 600, isLarge: false)
           ],
         ),
         const SizedBox(height: TSizes.spaceBtwItems/2)

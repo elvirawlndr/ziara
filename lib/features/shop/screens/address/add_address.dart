@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ziara/data/repositories/address/address_repository.dart';
 import 'package:ziara/features/shop/models/address_model.dart';
+import 'package:ziara/utils/const/sizes.dart';
 
 class AddAddressScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -30,31 +31,43 @@ class AddAddressScreen extends StatelessWidget {
                 decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) => value!.isEmpty ? 'Enter a name' : null,
               ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
+
               TextFormField(
                 controller: _streetController,
                 decoration: const InputDecoration(labelText: 'Street'),
                 validator: (value) => value!.isEmpty ? 'Enter a street' : null,
               ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
+
               TextFormField(
                 controller: _cityController,
                 decoration: const InputDecoration(labelText: 'City'),
                 validator: (value) => value!.isEmpty ? 'Enter a city' : null,
               ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
+
               TextFormField(
                 controller: _stateController,
                 decoration: const InputDecoration(labelText: 'State'),
                 validator: (value) => value!.isEmpty ? 'Enter a state' : null,
               ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
+
               TextFormField(
                 controller: _postalCodeController,
                 decoration: const InputDecoration(labelText: 'Postal Code'),
                 validator: (value) => value!.isEmpty ? 'Enter a postal code' : null,
               ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
+
               TextFormField(
                 controller: _countryController,
                 decoration: const InputDecoration(labelText: 'Country'),
                 validator: (value) => value!.isEmpty ? 'Enter a country' : null,
               ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
+              
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {

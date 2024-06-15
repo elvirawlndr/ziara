@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ziara/common/widgets/appbar.dart';
+import 'package:ziara/features/shop/controllers/product_controller.dart';
 import 'package:ziara/features/shop/screens/checkout/checkout.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_description.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_price_text.dart';
 import 'package:ziara/features/shop/screens/product_detail/product_size.dart';
-import 'package:ziara/utils/const/image_strings.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  final String productId;
+  const ProductDetailScreen({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
+    final ProductController productController = Get.find();
+    final product = productController.getProductById(productId);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Image(image: AssetImage(TImages.hoodie_1), width: 350, height: 350,),
+            Image.network(product.imageUrl, width: 350, height: 350),
             Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
@@ -35,13 +39,13 @@ class ProductDetailScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: 
-                              Text('Comfort Hoodie', style: Theme.of(context).textTheme.headlineSmall) 
+                              Text(product.name, style: Theme.of(context).textTheme.headlineSmall) 
                           ),
-                          const TProductPriceText(price: 600.000),
+                          TProductPriceText(price: product.price),
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const TProductDescription(),
+                      TProductDescription(description: product.description),
                       const SizedBox(height: 20),
                       const TProductSize(),
                       const SizedBox(height: 20),
