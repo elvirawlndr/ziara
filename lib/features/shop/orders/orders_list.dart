@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import 'package:ziara/common/styles/rounded_container.dart';
 import 'package:ziara/common/styles/rounded_image.dart';
 import 'package:ziara/common/widgets/products/product_title.dart';
-import 'package:ziara/features/shop/controllers/product_controller.dart';
 import 'package:ziara/features/shop/orders/detail_order.dart';
 import 'package:ziara/utils/const/colors.dart';
-import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';
 
 class TOrderListItem extends StatelessWidget {
@@ -14,16 +12,16 @@ class TOrderListItem extends StatelessWidget {
   final String productImage;
   final String productName;
   final String status;
-  final String dateTime;
+  final DateTime dateTime;
 
   const TOrderListItem({
-    Key? key,
+    super.key,
     required this.orderId,
     required this.productImage,
     required this.productName,
     required this.status,
     required this.dateTime,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +66,7 @@ class TOrderListItem extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: dateTime,
+                            text: dateTime.toString(),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],

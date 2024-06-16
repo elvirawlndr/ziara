@@ -7,13 +7,12 @@ class TCheckoutItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
                   children: [
-                    TRoundedImage(
-                      image: TImages.hoodie_1,
+                    Image.network(
+                      product.imageUrl,
                       width: 60,
                       height: 60,
-                      padding: const EdgeInsets.all(TSizes.sm),
-                      backgroundColor: THelperFunctions.isDarkMode(context) ? TColors.darkergrey : TColors.lightBase,
                     ),
+                  
                     const SizedBox(width: TSizes.spaceBtwItems),
 
                     Expanded(

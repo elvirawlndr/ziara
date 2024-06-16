@@ -12,18 +12,9 @@ class TBillingPaymentSection extends StatelessWidget {
 
         Row(
           children: [
-            TRoundedContainer(
-              width: 60,
-              height: 32,
-              backgroundColor: THelperFunctions.isDarkMode(context) ? TColors.lightBase : TColors.white,
-              padding: const EdgeInsets.all(TSizes.sm),
-              child: const FittedBox(
-                fit: BoxFit.contain,
-                child: Icon(Iconsax.card5),
-              ),
-            ),
-            const SizedBox(width: TSizes.spaceBtwItems/2),
-            Text('Bank Transfer', style: Theme.of(context).textTheme.bodyLarge)
+            const Icon(Iconsax.card5, color: Color.fromRGBO(224, 224, 224, 1), size: 16),
+            const SizedBox(width: TSizes.spaceBtwItems),
+            Text('Bank Transfer', style: Theme.of(context).textTheme.bodyMedium)
           ],
         )
       ],

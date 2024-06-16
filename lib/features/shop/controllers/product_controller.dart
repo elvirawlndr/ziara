@@ -66,4 +66,6 @@ class ProductController extends GetxController {
       throw Exception('Failed to fetch product: $e');
     }
   }
+
+  saveOrder(OrderModel order) {}
 }

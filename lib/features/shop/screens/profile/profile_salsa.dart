@@ -9,7 +9,6 @@ import 'package:ziara/features/personalization/models/usermodel.dart';
 import 'package:ziara/features/shop/models/address_model.dart';
 import 'package:ziara/features/shop/screens/address/add_address.dart';
 import 'package:ziara/features/shop/screens/profile/edit_profile.dart';
-import 'package:ziara/features/shop/orders/order.dart';
 import 'package:ziara/utils/const/colors.dart';
 import 'package:ziara/utils/const/image_strings.dart';
 import 'package:ziara/utils/const/sizes.dart';

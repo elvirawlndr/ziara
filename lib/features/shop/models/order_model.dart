@@ -5,7 +5,7 @@ class OrderModel {
   final String id;
   final ProductModel product;
   final String status;
-  final String dateTime;
+  final DateTime dateTime;
 
   OrderModel({
     required this.id,

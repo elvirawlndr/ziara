@@ -109,52 +109,80 @@ class HomeScreen extends StatelessWidget {
                     }
 
                     return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 8.0,
-                        crossAxisSpacing: 8.0,
-                      ),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          mainAxisExtent:
+                              290
+                          ),
                       itemCount: productController.products.length,
                       itemBuilder: (context, index) {
                         final product = productController.products[index];
                         return GestureDetector(
-                          onTap: () => Get.to(() => ProductDetailScreen(productId: product.id)),
+                          onTap: () => Get.to(
+                              () => ProductDetailScreen(productId: product.id)),
                           child: Card(
-                            color: Colors.white,
-                            elevation: 3,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Image.network(
-                                    product.imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        product.name,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                            elevation: 1,
+                            child: SizedBox(
+                              height:
+                                  200,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: Container(
+                                      width:
+                                          280,
+                                      height:
+                                          200,
+                                      margin: const EdgeInsets.all(10.0),
+                                      child: Container(
+                                        width:
+                                            250,
+                                        height:
+                                            180,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey
+                                              .shade200,
+                                          borderRadius: BorderRadius.circular(
+                                              10),
+                                        ),
+                                        child: Center(
+                                          child: Image.network(
+                                            product.imageUrl,
+                                            width: 120,
+                                            height: 120,
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        '\$${product.price.toStringAsFixed(2)}',
-                                        style: const TextStyle(
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          product.name,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          '\$${product.price.toStringAsFixed(2)}',
+                                          style: const TextStyle(
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
