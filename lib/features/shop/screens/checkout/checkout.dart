@@ -28,9 +28,8 @@ class CheckoutScreen extends StatelessWidget {
   CheckoutScreen({super.key, required this.product});
 
   void _performCheckout(BuildContext context) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => LoadingPage(),
+    Get.dialog(
+      LoadingPage(),
       barrierDismissible: false,
     );
 
@@ -40,12 +39,12 @@ class CheckoutScreen extends StatelessWidget {
       OrderModel order = OrderModel(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         product: product,
-        status: 'processing',
+        status: 'Processing',
         dateTime: DateTime.now(),
       );
       await productController.saveOrder(order);
 
-      Navigator.of(context).pop();
+      Get.back();
 
       Get.to(() => SuccessScreen(
             image: TImages.success,
@@ -55,16 +54,15 @@ class CheckoutScreen extends StatelessWidget {
           ));
     } catch (e) {
       print('Checkout failed: $e');
-      Navigator.of(context).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
+      Get.back();
+      Get.dialog(
+        AlertDialog(
           title: const Text('Error'),
           content: const Text('Failed to process checkout. Please try again later.'),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Get.back();
               },
               child: const Text('OK'),
             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ziara/common/styles/rounded_container.dart';
-import 'package:ziara/common/styles/rounded_image.dart';
 import 'package:ziara/common/widgets/products/product_title.dart';
 import 'package:ziara/features/shop/orders/detail_order.dart';
 import 'package:ziara/utils/const/colors.dart';
@@ -34,12 +33,10 @@ class TOrderListItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              TRoundedImage(
-                image: productImage,
+              Image.network(
+                productImage,
                 width: 60,
                 height: 60,
-                padding: const EdgeInsets.all(TSizes.sm),
-                backgroundColor: TColors.lightBase,
               ),
               const SizedBox(width: TSizes.sm),
               Expanded(

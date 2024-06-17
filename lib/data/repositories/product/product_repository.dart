@@ -22,4 +22,12 @@ class ProductRepository {
       throw 'Error adding product: $e';
     }
   }
+
+  Future<List<ProductModel>> fetchProductsByCategory(String category) async {
+    final snapshot = await _firestore
+        .collection('products')
+        .where('category', isEqualTo: category.toLowerCase())
+        .get();
+    return snapshot.docs.map((doc) => ProductModel.fromJson(doc.data())).toList();
+  }
 }

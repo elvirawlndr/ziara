@@ -29,7 +29,7 @@ class THomeCategories extends StatelessWidget {
             final category = categoryController.featuredCategories[index];
             return GestureDetector(
               onTap: () => Get.to(
-                  () => SubCategoryScreen()),
+                  () => SubCategoryScreen(category: category.name)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal:
@@ -70,13 +70,13 @@ class THomeCategories extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 4), // Space between the box and the text
+                    const SizedBox(height: 4),
                     Text(
                       category.name,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,
-                      ), // Adjusted text size and color to white
+                      ), 
                       textAlign: TextAlign.center,
                     ),
                   ],

@@ -20,7 +20,25 @@ class OrderModel {
       id: snapshot.id,
       product: ProductModel.fromJson(data['product']),
       status: data['status'],
-      dateTime: data['dateTime'],
+      dateTime: (data['dateTime'] as Timestamp).toDate(),
     );
+  }
+
+  factory OrderModel.fromJson(Map<String, dynamic> json) {
+    return OrderModel(
+      id: json['id'],
+      product: ProductModel.fromJson(json['product']),
+      status: json['status'],
+      dateTime: (json['dateTime'] as Timestamp).toDate(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'product': product.toJson(),
+      'status': status,
+      'dateTime': Timestamp.fromDate(dateTime),
+    };
   }
 }

@@ -10,6 +10,7 @@ class ProductController extends GetxController {
   static ProductController get instance => Get.find();
 
   final RxList<ProductModel> products = <ProductModel>[].obs;
+  final RxList<ProductModel> productsByCategory = <ProductModel>[].obs;
   final productRepository = Get.put(ProductRepository());
   var orders = <OrderModel>[].obs;
 
@@ -67,5 +68,24 @@ class ProductController extends GetxController {
     }
   }
 
-  saveOrder(OrderModel order) {}
+    // Fetch products by category
+  Future<void> fetchProductsByCategory(String category) async {
+    try {
+      print('Fetching products for category: $category');
+      final fetchedProducts = await productRepository.fetchProductsByCategory(category);
+      print('Fetched products: ${productsByCategory.length}');
+      productsByCategory.assignAll(fetchedProducts);
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Error', message: e.toString());
+    }
+  }
+
+  Future<void> saveOrder(OrderModel order) async {
+    // Save order to local observable list
+    orders.add(order);
+
+    // Save order to Firestore (or other database)
+    // Replace the following line with your Firestore save logic
+    await FirebaseFirestore.instance.collection('orders').add(order.toJson());
+  }
 }

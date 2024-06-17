@@ -25,6 +25,17 @@ class DetailOrderScreen extends StatelessWidget {
     }
   }
 
+  Future<void> _updateOrderStatus(String orderId) async {
+    try {
+      await FirebaseFirestore.instance.collection('orders').doc(orderId).update({
+        'status': 'Accepted',
+      });
+    } catch (e) {
+      print('Failed to update order status: $e');
+      throw Exception('Failed to update order status');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +83,7 @@ class DetailOrderScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Subtotal', style: Theme.of(context).textTheme.bodySmall),
-                              Text('Rp ${productData['price']}', style: Theme.of(context).textTheme.bodyMedium),
+                              Text('\$${productData['price']}.00', style: Theme.of(context).textTheme.bodyMedium),
                             ],
                           ),
                           const SizedBox(height: TSizes.sm),
@@ -80,18 +91,18 @@ class DetailOrderScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Transaction ID', style: Theme.of(context).textTheme.bodySmall),
-                              Text(orderData['transactionId'], style: Theme.of(context).textTheme.bodyMedium),
+                              Text(orderData['id'], style: Theme.of(context).textTheme.bodyMedium),
                             ],
                           ),
                           const SizedBox(height: TSizes.sm),
+                          /*
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Date', style: Theme.of(context).textTheme.bodySmall),
-                              Text(orderData['date'], style: Theme.of(context).textTheme.bodyMedium),
+                              Text(orderData['dateTime'].toString(), style: Theme.of(context).textTheme.bodyMedium),
                             ],
-                          ),
-                          const SizedBox(height: TSizes.sm),
+                          ),*/
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -116,13 +127,57 @@ class DetailOrderScreen extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              Get.to(
-                () => AcceptedScreen(
-                  image: TImages.success,
-                  title: 'Payment Success!',
-                  subTitle: 'Thank you for purchasing!',
-                  onPressed: () => Get.offAll(() => const NavigationMenu()),
-                )
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Confirm Acceptance'),
+                    content: Text('Are you sure you want to accept this order?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close dialog
+                        },
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          try {
+                            await _updateOrderStatus(orderId); // Update order status
+                            Navigator.of(context).pop(); // Close dialog
+                            Get.to(
+                              () => AcceptedScreen(
+                                image: TImages.success,
+                                title: 'Payment Accepted!',
+                                subTitle: 'Thank you for accepting the order!',
+                                onPressed: () => Get.offAll(() => const NavigationMenu()),
+                              ),
+                            );
+                          } catch (e) {
+                            print('Failed to accept order: $e');
+                            Navigator.of(context).pop(); // Close dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Failed to accept order. Please try again later.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Close dialog
+                                    },
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                        child: Text('Accept'),
+                      ),
+                    ],
+                  );
+                },
               );
             }, 
             style: ElevatedButton.styleFrom(

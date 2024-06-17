@@ -15,6 +15,7 @@ class AddProductScreen extends StatelessWidget {
     final TextEditingController priceController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     final TextEditingController imageUrlController = TextEditingController();
+    final TextEditingController categoryController = TextEditingController();
     final ProductController productController = ProductController.instance;
     final uuid = Uuid();
 
@@ -55,6 +56,13 @@ class AddProductScreen extends StatelessWidget {
                 labelText: 'Image URL',
               ),
             ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: categoryController,
+              decoration: const InputDecoration(
+                labelText: 'Category',
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -71,6 +79,7 @@ class AddProductScreen extends StatelessWidget {
                   price: int.parse(priceController.text),
                   description: descriptionController.text,
                   imageUrl: imageUrlController.text,
+                  category: categoryController.text
                 );
                 await productController.addProduct(newProduct);
                 Get.back();
