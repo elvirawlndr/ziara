@@ -1,3 +1,4 @@
+![Preview Ziara](preview-ziara.png)
 # 🛍️ Ziara — E-commerce App  
 
 Ziara is a mobile e-commerce application built with **Flutter** and **Firebase**, designed to deliver a simple yet powerful shopping experience.  
