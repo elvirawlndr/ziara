@@ -1,16 +1,31 @@
-# ziara
+# 🛍️ Ziara — E-commerce App  
 
-A new Flutter project.
+Ziara is a mobile e-commerce application built with **Flutter** and **Firebase**, designed to deliver a simple yet powerful shopping experience.  
+This project showcases core e-commerce features, from browsing products to managing orders — with a clean and modern interface.  
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features  
 
-A few resources to get you started if this is your first Flutter project:
+- 👤 **Authentication** — Secure login & register using Firebase Auth  
+- 🛒 **Product Browsing** — Explore products with detailed info  
+- 🔍 **Search** — Find products quickly and easily  
+- 📦 **Order Placement** — Add items to cart and place orders *(checkout is still dummy)*  
+- 🕑 **Order History** — View past orders for better tracking  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack  
+
+- **Framework**: Flutter  
+- **Backend & Database**: Firebase (Auth, Firestore)  
+- **Platform**: Android
+
+---
+
+## 🚀 Getting Started  
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/elvirawlndr/ziara.git
+   cd ziara
