@@ -23,10 +23,3 @@ This project showcases core e-commerce features, from browsing products to manag
 - **Platform**: Android
 
 ---
-
-## 🚀 Getting Started  
-
-1. Clone the repository:  
-   ```bash
-   git clone https://github.com/elvirawlndr/ziara.git
-   cd ziara
